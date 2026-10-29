@@ -1,0 +1,41 @@
+{
+  "name": "interview-preparation-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n web,api -c cyan,green \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "build": "npm run build -w frontend && npm run check -w backend",
+    "lint": "eslint . --max-warnings 0",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "start": "npm run start -w backend",
+    "preview": "npm run preview -w frontend",
+    "test:browser": "npm run test:browser:auth && npm run test:browser:student && npm run test:browser:admin",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "setup:dev": "npm run setup:dev -w backend",
+    "dev:db": "npm run dev:db -w backend",
+    "setup:admin": "npm run setup:admin -w backend",
+    "test:browser:auth": "playwright test tests/browser/workspace.spec.js",
+    "test:browser:student": "playwright test tests/browser/preparation.spec.js",
+    "test:browser:admin": "playwright test tests/browser/administration.spec.js"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^9.39.0",
+    "@playwright/test": "^1.64.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.10"
+  }
+}
